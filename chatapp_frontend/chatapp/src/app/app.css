@@ -1,6 +1,37 @@
-.container {
+.main {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
+  align-items: center;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 420px;
+  width: 100%;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 28px;
+}
+
+.chat-form {
+  background-color: rgb(4, 191, 129);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(4, 191, 129, 0.08);
+  gap: 12px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

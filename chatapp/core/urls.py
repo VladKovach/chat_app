@@ -18,6 +18,4 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-urlpatterns = [
-    path("chats/", include("market_app.urls")),
-]
+urlpatterns = [path("chats/", include("chat_app.urls"))]
