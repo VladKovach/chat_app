@@ -1,35 +1,77 @@
 <main class="main">
-  <div class="container">
-    <form action="" class="chat-form">
+  <div class="form-container">
+    <form [formGroup]="chatForm" (ngSubmit)="handleCreateChat()">
       <div class="form-group">
-        <label for="chat_name">Name:</label>
-        <input type="text" id="chat_name" name="chat_name" [(ngModel)]="chatName" />
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" />
+        <div
+          *ngIf="
+                 chatForm.get('name')?.invalid &&
+                 (chatForm.get('name')?.dirty || chatForm.get('name')?.touched)
+                "
+        >
+          <p class="error-text" *ngIf="chatForm.get('name')?.errors?.['required']">
+            Name is required.
+          </p>
+          <p class="error-text" *ngIf="chatForm.get('name')?.errors?.['minlength']">
+            Minimum 3 characters required.
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="chat_message">Message:</label>
-        <input type="text" id="chat_message" name="chat_message" [(ngModel)]="message" />
+
+      <div class="form-group message">
+        <label for="message">Message:</label>
+        <input type="text" id="message" formControlName="message" />
+        <div
+          *ngIf="
+                 chatForm.get('message')?.invalid &&
+                 (chatForm.get('message')?.dirty || chatForm.get('message')?.touched)
+                "
+        >
+          <p class="error-text" *ngIf="chatForm.get('message')?.errors?.['required']">
+            Message is required.
+          </p>
+          <p class="error-text" *ngIf="chatForm.get('message')?.errors?.['minlength']">
+            Minimum 3 characters required.
+          </p>
+        </div>
       </div>
+
       <div class="form-actions">
-        <button type="button" (click)="handleCreateChat()">Create Chats</button>
+        <button type="button" (click)="handleGetChats()">Get All Chats</button>
+        <button type="submit" [disabled]="chatForm.invalid">Create Chat</button>
+        <p class="error-text">{{ errorText }}</p>
       </div>
     </form>
-    <div class="get-chats">
-      <button type="button" (click)="handleGetChats()">Get All Chats</button>
+  </div>
+
+  <div class="chats-container">
+    <div class="container">
+      <h2>All Chats</h2>
+      @if (allChats.length) {
+      <div class="chats">
+        @for (chat of allChats; track chat) {
+        <div class="chat">
+          <p class="chat-id">Id: {{ chat.id }}</p>
+          <p class="chat-name">Name: {{ chat.name }}</p>
+          <p class="chat-message">Message: {{ chat.message }}</p>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    <div class="container">
+      <h2>New Created Chat</h2>
+      @if (createdChat?.id) {
+      <div class="chat">
+        <p class="chat-id">Id: {{ createdChat?.id }}</p>
+        <p class="chat-name">Name: {{ createdChat?.name }}</p>
+        <p class="chat-message">Message: {{ createdChat?.message }}</p>
+      </div>
+
+      }
     </div>
   </div>
-  <div id="result"></div>
-  <!-- <div class="result">
-    <div *ngIf="chats && chats.length > 0">
-      <h2>Chats:</h2>
-      <div *ngIf="chats && chats.length > 0; else noChats">
-        <ul>
-          <li *ngFor="let chat of chats">
-            <strong>{{ chat.name }}:</strong> {{ chat.message }}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 </main>
 
 <router-outlet></router-outlet>

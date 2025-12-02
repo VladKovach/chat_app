@@ -5,10 +5,61 @@
   flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  button {
+    background-color: #4caf50; /* A pleasant green */
+    color: white; /* White text for contrast */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px 20px; /* Comfortable padding inside */
+    font-size: 16px; /* Readable font size */
+    font-family: Arial, sans-serif; /* Clean sans-serif font */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+  }
+
+  button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+  }
+
+  button:disabled {
+    background-color: #cccccc; /* Gray when disabled */
+    cursor: not-allowed; /* Indicate disabled state */
+    color: #666666;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
+    width: 100%; /* Full width within container */
+    padding: 8px 12px 0; /* Comfortable padding */
+    margin: 5px 0 0; /* Spacing above and below */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+    font-family: Arial, sans-serif; /* Clean font */
+    box-sizing: border-box; /* Include padding in width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  }
+
+  input[type='text']:focus,
+  input[type='email']:focus,
+  input[type='password']:focus,
+  textarea:focus {
+    border-color: #66afe9; /* Blue border on focus */
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Soft glow on focus */
+    outline: none; /* Remove default outline */
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #aaa; /* Light gray placeholders */
+    font-style: italic; /* Italic style for placeholders */
+  }
 }
 
-.container {
+.form-container {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
@@ -33,5 +84,47 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+
+  position: relative;
+  &.message {
+    margin-top: 18px;
+  }
+}
+.form-actions {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.chats-container {
+  display: flex;
+  width: 1000px;
+  margin: 40px auto 0;
+  justify-content: space-around;
+}
+
+.error-text {
+  font-size: smaller;
+  color: rgb(192, 15, 15);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 55px;
+}
+.chats-container .container {
+  margin: 0px 20px;
+  max-width: 360px;
+  width: 100%;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 28px;
+  max-height: fit-content;
+  h2 {
+    text-align: center;
+  }
+}
+.chat {
+  border-top: 1px solid rgb(109, 109, 109);
+  margin: 6px 0;
 }

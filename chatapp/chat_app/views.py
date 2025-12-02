@@ -13,7 +13,7 @@ def chat_view(request):
         all_chats = Chat.objects.all()  # Fetch all chat entries
         chats_data = list(all_chats.values())  # Convert QuerySet to list of dicts
         print("chats_data = ", chats_data)
-        return JsonResponse({"chats": chats_data})
+        return JsonResponse(chats_data, safe=False)
     elif request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -27,8 +27,9 @@ def chat_view(request):
             return JsonResponse(
                 {"error": "Name and message cannot be empty"}, status=400
             )
-
+        if Chat.objects.filter(name__iexact=name).exists():
+            return JsonResponse({"error": "Chat name already exists"}, status=400)
         chat = Chat(name=name, message=message)
         chat.save()
 
-        return JsonResponse({"success": True, "chat_id": chat.id})
+        return JsonResponse({"success": True, "id": chat.id})
